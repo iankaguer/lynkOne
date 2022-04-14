@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteCond %{RESUEST_FILENAME} !-f
+
+RewriteCond %{REQUEST_URI} !.*\.(:ico|gif|css|png|js|jpe?g|mp3|wav|wma|flac|ogg|map|woff|woff2|ttf|eot|csv)$ [NC]
+
+
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
+
+#RewriteRule ^(.css)$ /public/css/ [NC,QSA,L]

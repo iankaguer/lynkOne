@@ -1,0 +1,77 @@
+<?php
+class __Controller{
+  
+	public $modelName;
+	public $modelId;
+	
+	
+	
+	public function __construct()
+	{
+		
+
+	}
+	
+	/**
+	 * @return bool|void
+	 * @check if there is  sessio  and an existing user with htese credentials
+	 */
+	public function verifSession(){
+		if (session_status() === PHP_SESSION_NONE  && !isset($_SESSION['auth'])) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	/**
+	 * @param string $path
+	 * @param array|null $params
+	 * @desc render view on page
+	 */
+	protected function view(string $path, array $params = null)
+	{
+		$this->verifSession();
+
+		ob_start();
+		$path = str_replace('.', DIRECTORY_SEPARATOR, $path);
+		require_once  $path . '.php';
+		if ($params) {
+			$params = extract($params);
+		}
+		$content = ob_get_clean();
+		require  'layout.php';
+	}
+	
+	/**
+	 * @param string $path
+	 * @param array|null $params
+	 * render a view in custon layout
+	 */
+	protected function viewError(string $path, array $params = null)
+	{
+		ob_start();
+		$path = str_replace('.', DIRECTORY_SEPARATOR, $path);
+		require_once  $path . '.php';
+		if ($params) {
+			$params = extract($params);
+		}
+		$content = ob_get_clean();
+		require  'errorLayout.php';
+	}
+
+    /**
+     * 
+     * @param string $path
+     * @param array|null $params
+     * @desc render view on page
+     */
+    protected function withJson(array $params)
+	{
+		return json_encode($params);
+	}
+
+	
+
+
+}

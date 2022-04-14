@@ -1,0 +1,20 @@
+{
+    "name": "dev/lynk-one",
+    "type": "project",
+    "authors": [
+        {
+            "name": "iankaguer",
+            "email": "36267404+iankaguer@users.noreply.github.com"
+        }
+    ],
+    "autoload" : {
+    	"psr-4" : {
+    		"Router\\" : "core/router",
+            "Controller\\" : "app/controller",
+            "Model\\" : "app/model",
+            "Config\\" : "config",
+            "ORM\\" : "core/orm"
+    	}
+    },
+    "require": {}
+}
